@@ -72,17 +72,17 @@ unless ($apikey){
 		exit 1;
 	}
 	chomp($apikey);
-	unless ($apikey =~ /^[0-9A-F]{8}-(?:[0-9A-F]{4}-){2}[0-9A-F]{16}\z$/){
-		print "Invalid API Key\n";
-		exit 1;
-	}
+	#unless ($apikey =~ /^[0-9A-F]{8}-(?:[0-9A-F]{4}-){2}[0-9A-F]{16}\z$/){
+	#	print "Invalid API Key\n";
+	#	exit 1;
+	#}
 	umask 066;
 	mkdir $confdir;
 	open my $fh, '>', $api_key_file or $logger->logdie("Couldn't open $api_key_file for writing: $!");
 	print $fh $apikey;
 	close $fh or $logger->logdie("Couldn't close $api_key_file: $!");
 }
-$logger->logdie('Invalid API key') unless ($apikey =~ /^[0-9A-F]{8}-(?:[0-9A-F]{4}-){2}[0-9A-F]{16}\z$/);
+#$logger->logdie('Invalid API key') unless ($apikey =~ /^[0-9A-F]{8}-(?:[0-9A-F]{4}-){2}[0-9A-F]{16}\z$/);
 
 my $stats = {
 	apikey  => $apikey,
@@ -134,6 +134,7 @@ while (!$quit) {
 sub _prep_for_main {
 	chown 0, 0, $api_key_file;
 	chmod 0600, $api_key_file;
+        print $ARGV[0]; 
 
 	daemonize_self();
 	enable_debug_logging() if(defined $ARGV[0] && $ARGV[0] =~ /Debug/i);
