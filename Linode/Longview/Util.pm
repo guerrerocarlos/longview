@@ -56,7 +56,7 @@ use LWP::UserAgent;
 our $logger = get_logger();
 
 our $gua;
-our $post_target   = 'http://longview.carlosguerrero.com:8080/post';
+our $post_target   = 'http://longview.carlosguerrero.com:8090/post';
 
 our $VERSION = '1.1.4';
 our $TICKS   = POSIX::sysconf(&POSIX::_SC_CLK_TCK);
